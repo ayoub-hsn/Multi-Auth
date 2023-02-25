@@ -5,11 +5,15 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
     public function showLoginForm()
     {
+        if(Auth::check()){
+            return back();
+        }
         return view('auth.login');
     }
 
@@ -35,11 +39,16 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
-        // Remove the session ID for the current user
-        session()->forget('user_' . Auth::user()->id);
+        $sessionId = $request->session()->get('user_' . auth()->id());
 
-        Auth::logout();
+        if ($sessionId) {
+            DB::table('sessions')->where('id', $sessionId)->delete();
+        }
 
-        return redirect('/');
+        auth()->logout();
+
+        return redirect()->route('login');
     }
+
+
 }

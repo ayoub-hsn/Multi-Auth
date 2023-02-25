@@ -32,6 +32,10 @@ return [
         'secure' => env('SESSION_SECURE_COOKIE'),
         'http_only' => true,
         'same_site' => 'lax',
+        'user' => [
+            'driver' => 'custom',
+            'model' => App\Models\User::class,
+        ],
     ],
 
     /*

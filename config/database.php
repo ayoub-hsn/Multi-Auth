@@ -91,6 +91,23 @@ return [
             'prefix_indexes' => true,
         ],
 
+        'session' => [
+            'driver' => 'mysql',
+            'url' => env('DATABASE_URL'),
+            'table' => 'sessions',
+            'database' => env('SESSION_DATABASE', env('DB_DATABASE', 'laravel')),
+            'prefix' => '',
+            'username' => env('SESSION_DB_USERNAME', env('DB_USERNAME', 'forge')),
+            'password' => env('SESSION_DB_PASSWORD', env('DB_PASSWORD', '')),
+            'host' => env('SESSION_DB_HOST', env('DB_HOST', '127.0.0.1')),
+            'port' => env('SESSION_DB_PORT', env('DB_PORT', '3306')),
+            'unix_socket' => env('SESSION_DB_SOCKET', env('DB_SOCKET', '')),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'strict' => true,
+            'engine' => null,
+        ],
+
     ],
 
     /*
